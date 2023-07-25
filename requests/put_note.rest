@@ -1,0 +1,17 @@
+PUT http://localhost:3001/api/notes/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 3,
+    "content": "No te olvides de la fermentación del pan",
+    "important": false
+}
+
+###
+
+POST http://localhost:3001/api/notes HTTP/1.1
+Content-Type: application/json
+
+{
+    
+}

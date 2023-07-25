@@ -85,6 +85,31 @@ app.post('/api/notes', (req, res) => {
   res.json(newNote)
 })
 
+app.put('/api/notes/:id', (req, res) => {
+  const id = Number(req.params.id)
+  console.log(`Note with id ${id} updated`)
+
+  const note = req.body
+
+  if (!note || !note.content) {
+    res.status(400).json({
+      error: 'note.content is missing'
+    })
+  }
+
+  let currentNote = notes.find((note) => note.id === id)
+
+  currentNote = {
+    ...currentNote,
+    content: note.content,
+    important: typeof note.important !== 'undefined' ? note.important : false
+  }
+
+  notes = [...notes.filter((n) => n.id !== id), currentNote]
+
+  res.json(currentNote)
+})
+
 app.use((req, res) => {
   res.status(404).json({
     error: 'Not found'
